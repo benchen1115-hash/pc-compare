@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 影片電腦選購比較｜吃播・冒險短片工作機</title>
+<style>
+  :root {
+    --bg: #F7F7F5;
+    --surface: #FFFFFF;
+    --ink: #1A1A1A;
+    --ink-2: #525252;
+    --ink-3: #8A8A8A;
+    --line: #E5E5E0;
+    --primary: #4F46E5;
+    --primary-dark: #4338CA;
+    --primary-soft: #EEF0FF;
+    --teal: #0D9488;
+    --teal-soft: #E7F7F5;
+    --amber: #D97706;
+    --amber-soft: #FEF3E2;
+    --green: #15803D;
+    --green-soft: #EAF6EE;
+    --red: #B91C1C;
+    --red-soft: #FEF2F2;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.06);
+    --shadow-lg: 0 2px 4px rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.10);
+    --radius: 10px;
+    --max: 1180px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247,247,245,.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+  .brand svg { display: block; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    color: var(--ink-2); text-decoration: none; font-size: 14px; font-weight: 500;
+    padding: 8px 12px; border-radius: 6px;
+  }
+  .nav-links a:hover { color: var(--ink); background: #EDEDEA; }
+  .nav-links a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 64px 0 40px; text-align: center; }
+  .hero .kicker {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 700; color: var(--primary);
+    background: var(--primary-soft); padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .hero h1 { font-size: 36px; line-height: 1.3; letter-spacing: .5px; }
+  .hero p.sub { margin-top: 12px; font-size: 16px; color: var(--ink-2); max-width: 640px; margin-left: auto; margin-right: auto; }
+
+  /* ---------- Plan cards ---------- */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 24px 0 8px; }
+  .plan {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    display: flex; flex-direction: column;
+    transition: box-shadow .2s ease, transform .2s ease;
+  }
+  .plan:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .plan.best { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary), var(--shadow); }
+  .plan.best:hover { box-shadow: 0 0 0 1px var(--primary), var(--shadow-lg); }
+  .badge {
+    position: absolute; top: -12px; right: 20px;
+    background: var(--primary); color: #fff;
+    font-size: 12px; font-weight: 700;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .plan .tier { font-size: 13px; font-weight: 700; color: var(--ink-3); letter-spacing: 1px; }
+  .plan h2 { font-size: 20px; margin: 4px 0 2px; }
+  .plan .tagline { font-size: 13px; color: var(--ink-3); margin-bottom: 16px; }
+  .price { font-size: 28px; font-weight: 700; line-height: 1.2; }
+  .price small { font-size: 14px; font-weight: 400; color: var(--ink-3); }
+  .plan hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
+  .plan ul { list-style: none; flex: 1; }
+  .plan li { display: flex; gap: 10px; font-size: 14px; padding: 6px 0; color: var(--ink-2); }
+  .plan li svg { flex: none; margin-top: 4px; }
+  .plan li.no { color: var(--ink-3); }
+  .plan .cta { margin-top: 20px; }
+  .btn {
+    display: block; width: 100%; height: 40px; line-height: 40px;
+    text-align: center; text-decoration: none;
+    border-radius: 8px; font-size: 14px; font-weight: 700;
+    background: var(--surface); color: var(--primary);
+    border: 1.5px solid var(--primary);
+    transition: background .15s ease, color .15s ease;
+  }
+  .btn:hover { background: var(--primary-soft); }
+  .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn.primary:hover { background: var(--primary-dark); }
+  .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  /* ---------- Between (4090) ---------- */
+  .between-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 32px;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: center;
+  }
+  .b-tier { font-size: 13px; font-weight: 700; color: var(--amber); letter-spacing: 1px; }
+  .between-card h3 { font-size: 22px; margin: 4px 0 2px; }
+  .between-card .tagline { font-size: 13px; color: var(--ink-3); margin-bottom: 12px; }
+  .between-card .price { font-size: 28px; font-weight: 700; }
+  .between-card .price small { font-size: 14px; font-weight: 400; color: var(--ink-3); }
+  .between-card p.spec { font-size: 14px; color: var(--ink-2); margin-top: 12px; }
+  .b-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .b-tags span {
+    font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+  }
+  .b-tags .ok { background: var(--green-soft); color: var(--green); }
+  .b-tags .no { background: var(--red-soft); color: var(--red); }
+  .b-tags .warn { background: var(--amber-soft); color: var(--amber); }
+  .between-card .mini-table { width: 100%; border-collapse: collapse; }
+  .between-card .mini-table th, .between-card .mini-table td { text-align: left; padding: 10px 12px; font-size: 14px; border-bottom: 1px solid var(--line); }
+  .between-card .mini-table th { color: var(--ink-3); font-weight: 600; white-space: nowrap; }
+  .between-card .mini-table td:not(:first-child) { text-align: center; }
+  .between-card .mini-table td:first-child { font-weight: 600; white-space: nowrap; }
+
+  /* ---------- Section ---------- */
+  section { padding: 48px 0 8px; }
+  .sec-head { text-align: center; margin-bottom: 28px; }
+  .sec-head h2 { font-size: 28px; }
+  .sec-head p { color: var(--ink-2); font-size: 14px; margin-top: 8px; }
+
+  /* ---------- Table ---------- */
+  .table-scroll { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); background: var(--surface); border: 1px solid var(--line); }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  th, td { text-align: left; padding: 14px 20px; font-size: 14px; vertical-align: top; }
+  thead th { background: #F0F0ED; font-weight: 700; white-space: nowrap; }
+  tbody tr + tr { border-top: 1px solid var(--line); }
+  td.rank { font-weight: 700; white-space: nowrap; color: var(--ink); width: 120px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.low { color: var(--green); font-weight: 700; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
+  .dot.g { background: var(--green); }
+  .dot.o { background: var(--amber); }
+  .dot.r { background: var(--red); }
+  .p10 { color: var(--green); font-weight: 600; }
+  .p5 { color: var(--amber); font-weight: 600; }
+  .p0 { color: var(--red); font-weight: 600; }
+
+  /* ---------- Stores ---------- */
+  .store-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .store {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 16px 18px;
+    text-decoration: none; color: var(--ink);
+    transition: box-shadow .15s ease, transform .15s ease;
+  }
+  .store:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px); }
+  .store:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .store .s-ico {
+    width: 40px; height: 40px; flex: none; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--primary-soft); color: var(--primary);
+  }
+  .store .s-name { font-size: 14px; font-weight: 700; }
+  .store .s-desc { font-size: 12px; color: var(--ink-3); }
+  .store .s-go { margin-left: auto; color: var(--ink-3); flex: none; }
+
+  /* ---------- Electric calc ---------- */
+  .calc {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 32px; max-width: 760px; margin: 0 auto;
+  }
+  .calc label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+  .calc label output { color: var(--primary); font-size: 18px; }
+  input[type="range"] { width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: #E5E5E0; border-radius: 3px; }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--primary); border: 3px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); cursor: pointer;
+  }
+  input[type="range"]:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .calc-card { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+  .calc-card h3 { font-size: 14px; color: var(--ink-2); font-weight: 600; }
+  .calc-card .amt { font-size: 28px; font-weight: 700; margin-top: 4px; }
+  .calc-card p.note { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+  .calc-tip { margin-top: 20px; font-size: 13px; color: var(--ink-2); background: var(--teal-soft); border-radius: 8px; padding: 12px 16px; display: flex; gap: 10px; }
+
+  /* ---------- Verdict ---------- */
+  .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+  .vcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px; }
+  .vcard h3 { font-size: 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .vcard p { font-size: 14px; color: var(--ink-2); margin-bottom: 12px; }
+  .vcard ul { list-style: none; }
+  .vcard li { font-size: 14px; color: var(--ink-2); padding: 5px 0; padding-left: 20px; position: relative; }
+  .vcard li::before { content: ""; position: absolute; left: 4px; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 24px 0; text-align: center; color: var(--ink-3); font-size: 13px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .plans { grid-template-columns: 1fr; }
+    .plan { padding: 20px; }
+    .verdict { grid-template-columns: 1fr; }
+    .calc-grid { grid-template-columns: 1fr; }
+    .store-grid { grid-template-columns: 1fr 1fr; }
+    .between-card { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+    .sec-head h2 { font-size: 24px; }
+    .nav { flex-wrap: wrap; height: auto; padding: 12px 0; gap: 4px; }
+    .nav-links { width: 100%; }
+    .nav-links a { padding: 6px 8px; font-size: 12px; }
+  }
+  @media (max-width: 560px) {
+    .store-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+      </svg>
+      影片機比較
+    </div>
+    <nav class="nav-links">
+      <a href="#plans">三套方案</a>
+      <a href="#between">4090 中間案</a>
+      <a href="#spec">規格表</a>
+      <a href="#cap">能力比較</a>
+      <a href="#stores">店家比價</a>
+      <a href="#electric">電費</a>
+      <a href="#verdict">結論</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="kicker">2026 年 8 月・台灣通路現價・NT$</div>
+    <h1>AI 吃播・冒險短片<br>電腦怎麼選？</h1>
+    <p class="sub">目標是 IG 那種「分鏡拼接」的 AI 短片。四條路：5080 省錢、4090 偷渡 24G、5090 一步到位——先看差別再下單。</p>
+  </div>
+
+  <!-- Plans -->
+  <section id="plans">
+    <div class="plans">
+
+      <!-- A -->
+      <article class="plan">
+        <div class="tier">PLAN A</div>
+        <h2>入門・5080</h2>
+        <div class="tagline">吃播＋冒險短片・CP 值之王</div>
+        <div class="price">106,400 <small>NT$</small></div>
+        <hr>
+        <ul>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            RTX 5080 16GB（微星龍耀40整機）
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            R7 9800X3D + X870 + 64GB RAM
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            Wan 14B（量化）＋ LTX 小檔
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            多鏡頭 2 分鐘短片 ✓
+          </li>
+          <li class="no">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+            一鏡到底 40s ✗
+          </li>
+        </ul>
+        <div class="cta"><a class="btn" href="#stores">看店家</a></div>
+      </article>
+
+      <!-- BETWEEN (4090) -->
+      <article class="plan">
+        <div class="tier" style="color:var(--amber)">BETWEEN</div>
+        <h2>中間・4090</h2>
+        <div class="tagline">二手偷渡 24G 顯存</div>
+        <div class="price">~120,000 <small>NT$</small></div>
+        <hr>
+        <ul>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            RTX 4090 <b>24GB</b>（二手市場）
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            R7 9700X + B650 + 64GB RAM
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            Wan 14B 滿血・混元 24G 可跑
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            畫質比 5080 高一階 ✓
+          </li>
+          <li class="no">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+            LTX-2.3 22B ✗（要 32G）
+          </li>
+        </ul>
+        <div class="cta"><a class="btn" href="#between">看比較</a></div>
+      </article>
+
+      <!-- C -->
+      <article class="plan best">
+        <span class="badge">推薦</span>
+        <div class="tier">PLAN C</div>
+        <h2>一步到位・5090＋128G</h2>
+        <div class="tagline">一鏡到底・並行最強</div>
+        <div class="price">229,000 <small>NT$</small></div>
+        <hr>
+        <ul>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            RTX 5090 32GB
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            R7 9800X3D + X870E + <b>128GB RAM</b>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            LTX-2.3 22B・Wan 14B・混元全吃
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            一鏡到底 40s ✓
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            生成＋解碼＋放大並行跑
+          </li>
+        </ul>
+        <div class="cta"><a class="btn primary" href="#verdict">買個心安</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Between 4090 detail -->
+  <section id="between">
+    <div class="sec-head">
+      <h2>A 和 B 之間：RTX 4090 24G</h2>
+      <p>多花約 1.5 萬，顯存 16G→24G，畫質跳一階——2026 顯存危機下的偷渡方案。</p>
+    </div>
+    <div class="between-card">
+      <div class="b-left">
+        <div class="b-tier">BETWEEN PLAN</div>
+        <h3>RTX 4090 24G 工作機</h3>
+        <div class="tagline">約 12~13 萬（4090 為二手市場價）</div>
+        <div class="price">~120,000 <small>NT$</small></div>
+        <p class="spec">RTX 4090 24GB（蝦皮／露天二手約 7~8 萬）＋ R7 9700X ＋ B650 ＋ 64GB RAM ＋ 2TB SSD ＋ 1000W 電供</p>
+        <div class="b-tags">
+          <span class="ok">Wan 14B 滿血 ✓</span>
+          <span class="ok">混元 Video ✓</span>
+          <span class="warn">LTX-2.x 部分 ✓</span>
+          <span class="no">LTX-2.3 22B ✗</span>
+          <span class="no">二手保固風險 ⚠</span>
+        </div>
+      </div>
+      <div class="b-right">
+        <table class="mini-table">
+          <thead>
+            <tr><th></th><th>A・5080</th><th>4090</th><th>C・5090</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>顯存</td><td>16GB</td><td><b>24GB</b></td><td>32GB</td></tr>
+            <tr><td>Wan 14B</td><td>量化</td><td>滿血</td><td>滿血</td></tr>
+            <tr><td>混元 Video</td><td>✗</td><td>✓</td><td>✓</td></tr>
+            <tr><td>LTX-2.3 22B</td><td>✗</td><td>✗</td><td>✓</td></tr>
+            <tr><td>畫質</td><td>80 分</td><td><b>83 分</b></td><td>85 分</td></tr>
+            <tr><td>總價</td><td>10.6 萬</td><td><b>~12 萬</b></td><td>22.9 萬</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spec table -->
+  <section id="spec">
+    <div class="sec-head">
+      <h2>完整規格對照</h2>
+      <p>原價屋 2026/8 現價，含組裝費不含螢幕。</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>A・入門 5080</th>
+            <th>B・4090 中間案</th>
+            <th>C・5090＋128G</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="rank">總價</td><td class="num">106,400</td><td class="num">~120,000</td><td class="num">229,000</td></tr>
+          <tr><td class="rank">GPU</td><td>RTX 5080 16GB（新品）</td><td>RTX 4090 24GB（二手）</td><td>RTX 5090 32GB（新品）</td></tr>
+          <tr><td class="rank">CPU</td><td>R7 9800X3D</td><td>R7 9700X</td><td>R7 9800X3D</td></tr>
+          <tr><td class="rank">主機板</td><td>X870</td><td>B650</td><td>X870E</td></tr>
+          <tr><td class="rank">RAM</td><td>64GB DDR5</td><td>64GB DDR5</td><td>128GB DDR5</td></tr>
+          <tr><td class="rank">SSD</td><td>4TB NVMe</td><td>2TB NVMe</td><td>4TB NVMe Gen4</td></tr>
+          <tr><td class="rank">電供</td><td>850W</td><td>1000W</td><td>1200W ATX3.1</td></tr>
+          <tr><td class="rank">保固</td><td>整機新機保固</td><td>顯卡二手、其餘新品</td><td>整機新機保固</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Capability -->
+  <section id="cap">
+    <div class="sec-head">
+      <h2>能力比較</h2>
+      <p>同樣做「AI 吃播＋冒險短片」，差別在哪。</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>能力</th>
+            <th>A・5080</th>
+            <th>B・4090</th>
+            <th>C・5090＋128G</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank">能吃模型</td>
+            <td>Wan 14B（量化）・LTX 小檔</td>
+            <td>Wan 14B 滿血・混元・LTX 小檔</td>
+            <td>全吃（含 LTX-2.3 22B）</td>
+          </tr>
+          <tr>
+            <td class="rank">單鏡頭畫質</td>
+            <td><span class="dot g"></span>720p・很好</td>
+            <td><span class="dot g"></span>720p・更好一階</td>
+            <td><span class="dot g"></span>720p・上限最高</td>
+          </tr>
+          <tr>
+            <td class="rank">多鏡頭 2 分鐘片</td>
+            <td><span class="p10">✓ 可以</span></td>
+            <td><span class="p10">✓ 可以</span></td>
+            <td><span class="p10">✓ 可以</span></td>
+          </tr>
+          <tr>
+            <td class="rank">一鏡到底 40s</td>
+            <td><span class="p0">✗ 不行</span></td>
+            <td><span class="p5">△ 部分（LTX 2.x）</span></td>
+            <td><span class="p10">✓ 可以</span></td>
+          </tr>
+          <tr>
+            <td class="rank">並行處理</td>
+            <td><span class="p5">普通（64G）</span></td>
+            <td><span class="p5">普通（64G）</span></td>
+            <td><span class="p10">最強（128G）</span></td>
+          </tr>
+          <tr>
+            <td class="rank">40s 成片時間</td>
+            <td>約 1~2 小時一輪</td>
+            <td>略快於 A</td>
+            <td>略快，瓶頸在挑段</td>
+          </tr>
+          <tr>
+            <td class="rank">主要風險</td>
+            <td>畫質天花板低</td>
+            <td><span class="p5">二手卡保固／假卡</span></td>
+            <td>貴</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Stores -->
+  <section id="stores">
+    <div class="sec-head">
+      <h2>店家連結・一頁比價</h2>
+      <p>價差隨時變動，下單前先在飛比／BigGo 跑一輪。</p>
+    </div>
+    <div class="store-grid">
+      <a class="store" href="https://www.coolpc.com.tw/evaluate.php" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"></path><rect x="2" y="7" width="20" height="14" rx="1"></rect><path d="M9 3v4M15 3v4"></path></svg>
+        </span>
+        <div><div class="s-name">原價屋</div><div class="s-desc">線上估價・龍耀40 整機來源</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://www.sinya.com.tw/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M9 22V12h6v10"></path></svg>
+        </span>
+        <div><div class="s-name">欣亞數位</div><div class="s-desc">線上估價・搭機價優惠</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://24h.pchome.com.tw/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><path d="M12 22V12M3.3 7l8.7 5 8.7-5"></path></svg>
+        </span>
+        <div><div class="s-name">PChome 24h</div><div class="s-desc">偶有 5090 原價釋出</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://www.momoshop.com.tw/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><path d="M3 6h18M16 10a4 4 0 0 1-8 0"></path></svg>
+        </span>
+        <div><div class="s-name">momo 購物網</div><div class="s-desc">整機／套裝促銷</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://tw.buy.yahoo.com/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>
+        </span>
+        <div><div class="s-name">Yahoo 購物中心</div><div class="s-desc">折價券活動多</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://shopee.tw/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        </span>
+        <div><div class="s-name">蝦皮商城</div><div class="s-desc">4090 二手主力戰場</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://www.ruten.com.tw/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11V7a4 4 0 0 0-8 0v4M16 11a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4h8z"></path><rect x="3" y="11" width="18" height="10" rx="2"></rect></svg>
+        </span>
+        <div><div class="s-name">露天拍賣</div><div class="s-desc">4090 二手另一戰場</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://feebee.com.tw/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+        </span>
+        <div><div class="s-name">飛比價格</div><div class="s-desc">跨店比價引擎</div></div>
+        <span class="s-go">→</span>
+      </a>
+      <a class="store" href="https://biggo.com.tw/" target="_blank" rel="noopener">
+        <span class="s-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+        </span>
+        <div><div class="s-name">BigGo 比價</div><div class="s-desc">找歷史低價</div></div>
+        <span class="s-go">→</span>
+      </a>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>零件</th>
+            <th>原價屋</th>
+            <th>欣亞</th>
+            <th>PChome</th>
+            <th>其他管道</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank">RTX 5080 16G</td>
+            <td>52,888~56,990<br><span class="p10">INNO3D X3 最便宜</span></td>
+            <td>約同價</td>
+            <td>約 53,000+</td>
+            <td>momo／Yahoo 活動時可撿券</td>
+          </tr>
+          <tr>
+            <td class="rank">RTX 5090 32G</td>
+            <td>159,990~179,990<br><span class="p0">一律限組裝</span></td>
+            <td>同（限組裝）</td>
+            <td>偶有原價 71,990 釋出<br><span class="p5">秒殺、極少量</span></td>
+            <td>ZOTAC 水冷版曾殺到 80,000（蹲活動）</td>
+          </tr>
+          <tr>
+            <td class="rank">RTX 4090 24G（二手）</td>
+            <td>停產無新品</td>
+            <td>停產無新品</td>
+            <td>極少福利品</td>
+            <td>蝦皮／露天 70,000~80,000<br><span class="p5">注意假卡／保固</span></td>
+          </tr>
+          <tr>
+            <td class="rank">微星龍耀40（5080 整機）</td>
+            <td>86,900 <span class="p10">（此價）</span></td>
+            <td>需詢價</td>
+            <td>-</td>
+            <td>微星 40 週年專案機</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Electric -->
+  <section id="electric">
+    <div class="sec-head">
+      <h2>每月電費估算</h2>
+      <p>拖動「每天全速跑幾小時」，看 A 和 C 的差別。</p>
+    </div>
+    <div class="calc">
+      <label for="hours">每天全速生成 <output id="hoursOut">6 小時</output></label>
+      <input type="range" id="hours" min="1" max="24" value="6">
+      <div class="calc-grid">
+        <div class="calc-card">
+          <h3>A・5080（滿載 500W）</h3>
+          <div class="amt" id="amtA">NT$405</div>
+          <p class="note">約含閒置負載、累進電價 NT$4.5/度</p>
+        </div>
+        <div class="calc-card">
+          <h3>B・4090（滿載 650W）</h3>
+          <div class="amt" id="amtB">NT$527</div>
+          <p class="note">約含閒置負載、累進電價 NT$4.5/度</p>
+        </div>
+        <div class="calc-card">
+          <h3>C・5090（滿載 750W）</h3>
+          <div class="amt" id="amtC">NT$608</div>
+          <p class="note">約含閒置負載、累進電價 NT$4.5/度</p>
+        </div>
+      </div>
+      <div class="calc-tip">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;">
+          <circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path>
+        </svg>
+        只有生成時才吃滿功耗，找 prompt、剪接時只有閒置 80~100W。白天關機、晚上一次跑完，電費更省。
+      </div>
+    </div>
+  </section>
+
+  <!-- Verdict -->
+  <section id="verdict">
+    <div class="sec-head">
+      <h2>該買哪一套？</h2>
+    </div>
+    <div class="verdict">
+      <div class="vcard">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="M22 4 12 14.01l-3-3"></path></svg>
+          求穩・買 A（10.6 萬）
+        </h3>
+        <p>目標是 IG 那種「分鏡拼接」短片，多鏡頭片 16GB 綽綽有餘，整機新機保固最安心。</p>
+        <ul>
+          <li>省 12 萬，升級時賣掉 5080 回血</li>
+          <li>畫質 80 分，多鏡頭片完全夠用</li>
+          <li>適合「先試水、不確定會玩多久」</li>
+        </ul>
+      </div>
+      <div class="vcard">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+          求畫質・偷渡 4090（12 萬）
+        </h3>
+        <p>多花 1.5 萬換 24G 顯存，Wan 14B 滿血、混元能跑，畫質跳一階——前提是接受二手卡風險。</p>
+        <ul>
+          <li>顯存 24G 是 5080 到 5090 的最大差距</li>
+          <li>二手約 7~8 萬，蹲好卡＋測壓力測試</li>
+          <li>不追一鏡到底 22B 的話，CP 值最高</li>
+        </ul>
+      </div>
+      <div class="vcard">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          一步到位・買 C（22.9 萬）
+        </h3>
+        <p>預算扛得住、確定要一鏡到底 40s——C 把硬體疑慮一次清空，剩下只剩你的技術。</p>
+        <ul>
+          <li>能上 LTX-2.3 22B，一鏡到底 40s</li>
+          <li>128GB RAM 讓生成／解碼／放大並行</li>
+          <li>唯一瓶頸是模型能力和挑段手氣</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">2026・AI 影片工作機比較・價格以當日通路報價為準・4090 為二手行情價</div>
+</footer>
+
+<script>
+  const rate = 4.5;
+  const idleA = 80, loadA = 500;
+  const idleB = 100, loadB = 650;
+  const idleC = 100, loadC = 750;
+
+  function fmt(n) {
+    return "NT$" + Math.round(n).toLocaleString("zh-TW");
+  }
+
+  function calc() {
+    const h = +document.getElementById("hours").value;
+    document.getElementById("hoursOut").textContent = h + " 小時";
+    const dayA = (loadA * h + idleA * (24 - h)) / 1000;
+    const dayB = (loadB * h + idleB * (24 - h)) / 1000;
+    const dayC = (loadC * h + idleC * (24 - h)) / 1000;
+    document.getElementById("amtA").textContent = fmt(dayA * 30 * rate);
+    document.getElementById("amtB").textContent = fmt(dayB * 30 * rate);
+    document.getElementById("amtC").textContent = fmt(dayC * 30 * rate);
+  }
+
+  document.getElementById("hours").addEventListener("input", calc);
+  calc();
+</script>
+
+</body>
+</html>
